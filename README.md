@@ -5,7 +5,7 @@ The [Mozilla Location Service](https://location.services.mozilla.com) (MLS) is a
 
 ![Demo Image](/demo-images/demo_1.png)
 
-### 🥰 Demo [alexyuan.me/project/mls-globe](https://alexyuan.me/project/mls-globe)
+## 🥰 Demo [alexyuan.me/project/mls-globe](https://alexyuan.me/project/mls-globe)
 
 #### How does it work?
 * Make sure that the Mozilla Location Service data is inside your directory
@@ -18,7 +18,8 @@ If the lines on the globe seem very large or small, change the number which ```p
 
 The code which powers the demo is a tiny bit different than what you would find in the repository. A few changes needed to be made in order for things to work out smoothly on the web server.
 
-The data used to power this visualization was acquired from the Mozilla Location Service and was not added to this repository as it is very large. You can get it from [here](https://location.services.mozilla.com/downloads) though.
+#### Where is the data? Why is the file not found?
+The data used to power this visualization was acquired from the Mozilla Location Service and was not added to this repository as it is very large. You can get it from [here](https://location.services.mozilla.com/downloads) though. After downloading the raw data, you'll have the rename the csv file name string in ```process.py```.
 
 All feedback is appreciated. My personal website, portfolio, blog, and contact information is found at [alexyuan.me](https://alexyuan.me).
 
