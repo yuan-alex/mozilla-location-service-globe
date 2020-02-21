@@ -1,0 +1,179 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <title>🌐 MLS Globe Visualization</title>
+    <meta charset="utf-8">
+    <meta name="description" content="A Mozilla Location Services visualization using WebGL Globe.">
+    <meta name="keywords" content="mozilla, location, service, visualization, webgl, globe">
+
+    <link
+        href="https://fonts.googleapis.com/css?family=DM+Sans|DM+Serif+Display|DM+Serif+Text|Nunito|Roboto|Roboto+Mono|Lato&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <style type="text/css">
+        * {
+            font-family: DM Sans !important;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000000 url(loading.gif) center center no-repeat;
+            color: #ffffff;
+            font-size: 13px;
+            line-height: 20px;
+            height: 100%;
+        }
+
+        #info {
+            font-size: 12px;
+            position: absolute;
+            bottom: 5px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 3px;
+            right: 10px;
+            padding: 10px;
+        }
+
+        #currentInfo {
+            width: 270px;
+            position: absolute;
+            left: 20px;
+            top: 400px;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 10px;
+        }
+
+        a {
+            color: #aaa;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .bull {
+            padding: 0 5px;
+            color: #555;
+        }
+
+        #title {
+            position: absolute;
+            top: 20px;
+            width: 360px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 3px;
+        }
+
+        .time {
+            line-height: 26px;
+            height: 30px;
+            text-align: center;
+            float: left;
+            width: 90px;
+            color: rgba(255, 255, 255, 0.4);
+
+            cursor: pointer;
+            -webkit-transition: all 0.1s ease-out;
+        }
+
+        .time:hover,
+        .time.active {
+            font-size: 23px;
+            color: #fff;
+        }
+
+        #ce span {
+            display: none;
+        }
+
+        #ce {
+            width: 107px;
+            height: 55px;
+            display: block;
+            position: absolute;
+            bottom: 15px;
+            left: 20px;
+            background: url(ce.png);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="container"></div>
+
+    <div id="info">
+        <strong><a href="https://www.chromeexperiments.com/globe">Powered by WebGL Globe</a></strong> <span
+            class="bull">&bull;</span> Data
+        acquired from the <a href="https://location.services.mozilla.com/"> Mozilla Location Service</a> <span
+            class="bull">&bull;</span> Want more of my stuff? <a href="https://alexyuan.me">https://alexyuan.me</a>
+    </div>
+
+    <div id="title">
+		<div class="p-3">
+			<h2>📡 A look at the Mozilla Location Service with WebGL Globe 🌐</h2>
+			<p>The <a href="https://location.services.mozilla.com/"> Mozilla Location Service</a> (MLS) is an
+				open-source location service provided by the folks at
+				Mozilla.
+				This visualization attempts to illustrate the scale of this project and connectivity hotspots around the globe and is powered by the <a href="http://www.chromeexperiments.com/globe">WebGL Globe</a>
+				framework; an open-source project created by Google.</p>
+			<p>If you're intrested in more of my work, check out <a href="https://alexyuan.me/">https://alexyuan.me</a>.
+			</p>
+			<p>This globe uses Mozilla's data for February 8th, 2020</p>
+		</div>
+	</div>
+
+    <!--
+    <a id="ce" href="http://www.chromeexperiments.com/globe">
+        <span>This is a Chrome Experiment</span>
+    </a>
+    -->
+
+    <!-- added CDNs to make directories easier and Bootstrap to make things prettier -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/snackbarjs/1.1.0/snackbar.min.js"
+        integrity="sha256-yIGfMkQAq4NiRvtt6ilwQljILYzKZtHxIvhjXvxdWXg=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="third-party/Detector.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"
+        integrity="sha256-gSh8eotzb/CVvCREGPUNgIWuDnTYnZvVOQnRrP1eDjI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.5.0/Tween.min.js"
+        integrity="sha256-hAigqn/ls/F8odRXfZZ0eXydihnV3bafe61O0roKYEM=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="globe.js"></script>
+
+    <script type="text/javascript">
+        if (!Detector.webgl) {
+            Detector.addGetWebGLMessage();
+        } else {
+            var globe = DAT.Globe(document.getElementById('container'));
+
+            // might as well use json to make things easier to work with
+            $.getJSON('compiled.json', function (data) {
+                console.log('Data recieved');
+                console.log(data);
+                globe.addData(data, { format: 'magnitude' });
+                globe.createPoints();
+                globe.animate();
+                document.body.style.backgroundImage = 'none'; // remove loading
+            });
+        }
+    </script>
+</body>
+
+</html>
