@@ -1,7 +1,7 @@
 # 🌐 Mozilla Location Service WebGL Globe
 ### 📡 A look at the Mozilla Location Service with WebGL Globe
 
-The [Mozilla Location Service](https://location.services.mozilla.com) (MLS) is an open-source location service provided by the folks at Mozilla. This visualization attempts illustrate the scale of this project and connectivity hotspots around the world and is powered by the [WebGL Globe](http://www.chromeexperiments.com/globe) framework; an open-source project created by the Google Data Arts Team.
+The [Mozilla Location Service](https://location.services.mozilla.com) (MLS) is an open-source location service provided by the folks at Mozilla. This visualization attempts to illustrate the scale of this project and connectivity hotspots around the world and is powered by the [WebGL Globe](http://www.chromeexperiments.com/globe) framework; an open-source project created by the Google Data Arts Team.
 
 ![Demo Image](/demo-images/demo_1.png)
 
