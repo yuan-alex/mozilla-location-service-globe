@@ -5,7 +5,7 @@ The [Mozilla Location Service](https://location.services.mozilla.com) (MLS) is a
 
 ![Demo Image](/demo-images/demo_1.png)
 
-## 🥰 Demo [alexyuan.me/project/mls-globe](https://alexyuan.me/project/mls-globe)
+## 🥰 Demo [mls-globe.alexyuan.me](https://alexyuan.me/project/mls-globe)
 
 #### How does it work?
 * Make sure that the Mozilla Location Service data is inside your directory
