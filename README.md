@@ -5,7 +5,9 @@ The [Mozilla Location Service](https://location.services.mozilla.com) (MLS) is a
 
 ![Demo Image](/demo-images/demo_1.png)
 
-## 🥰 Demo [mls-globe.alexyuan.me](https://alexyuan.me/project/mls-globe)
+### 🥰 Demo [mls-globe.alexyuan.me](https://mls-globe.alexyuan.me)
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e4fdd5f6-067c-47a1-8029-86a40bbb2dad/deploy-status)](https://app.netlify.com/sites/mls-globe/deploys)
 
 #### How does it work?
 * Make sure that the Mozilla Location Service data is inside your directory
